@@ -2,70 +2,74 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.Assert.*;
 
-public class oddEvenTester{
+public class oddEvenTester {
 
-    OddEvenChecker OddEvenTestObj;
+    MinMaxChecker MinMaxTestObj;
 
     @BeforeEach
-    public void init(){
-        OddEvenTestObj = new OddEvenChecker();
+    public void init() {
+        MinMaxTestObj = new MinMaxChecker();
     }
 
     @Nested
-    class oddClass{
+    class minClass{
 
         @Test
-        @DisplayName("Test 3 is odd")
-        public void oddTest1() {
-            assertEquals("ODD", OddEvenTestObj.OddEvenCheck(3));
-        }
-        @Test
-        @DisplayName("Test -1 is odd")
-        public void oddTest2() {
-            assertEquals("ODD", OddEvenTestObj.OddEvenCheck(-1));
-        }
-        @Test
-        @DisplayName("Test 99 is odd")
-        public void oddTest3() {
-            assertEquals("ODD", OddEvenTestObj.OddEvenCheck(99));
-        }
-        @Test
-        @DisplayName("Test 412687421 is odd")
-        public void oddTest4() {
-            assertEquals("ODD", OddEvenTestObj.OddEvenCheck(412687421));
+        @DisplayName("Testing min of [1, 300, -2, 0, 23], expecting -2")
+        public void minTest1() {
+            MinMaxTestObj.setArrToCheck(new int[]{1, 300, -2, 0, 23});
+            assertEquals(-2, MinMaxTestObj.MinCheck());
         }
 
+        @Test
+        @DisplayName("Testing min of [0, -5, 78, -426, 1988], expecting -426")
+        public void minTest2() {
+            MinMaxTestObj.setArrToCheck(new int[]{0, -5, 78, -426, 1988});
+            assertEquals(-426, MinMaxTestObj.MinCheck());
+        }
+
+        @Test
+        @DisplayName("Testing min of [-241455, -4879, -54841, 0 ,31145], expecting -241455")
+        public void minTest3() {
+            MinMaxTestObj.setArrToCheck(new int[]{-241455, -4879, -54841, 0, 31145});
+            assertEquals(-241455, MinMaxTestObj.MinCheck());
+        }
     }
 
     @Nested
-    class evenClass{
+    class maxClass{
 
         @Test
-        @DisplayName("Test 2 is even")
-        public void evenTest1() {
-            assertEquals("EVEN", OddEvenTestObj.OddEvenCheck(2));
+        @DisplayName("Testing max of [1, 300, -2, 0, 23], expecting 300")
+        public void maxTest1() {
+            MinMaxTestObj.setArrToCheck(new int[]{1, 300, -2, 0, 23});
+            assertEquals(300, MinMaxTestObj.MaxCheck());
         }
+
         @Test
-        @DisplayName("Test -114 is even")
-        public void evenTest2() {
-            assertEquals("EVEN", OddEvenTestObj.OddEvenCheck(-114));
+        @DisplayName("Testing max of [0, -5, 78, -426, 1988], expecting 1988")
+        public void maxTest2() {
+            MinMaxTestObj.setArrToCheck(new int[]{0, -5, 78, -426, 1988});
+            assertEquals(1988, MinMaxTestObj.MaxCheck());
         }
+
         @Test
-        @DisplayName("Test 0 is even")
-        public void evenTest3() {
-            assertEquals("EVEN", OddEvenTestObj.OddEvenCheck(0));
+        @DisplayName("Testing max of [-241455, 2441, -54841, 0 ,31145], expecting 31145")
+        public void maxTest3() {
+            MinMaxTestObj.setArrToCheck(new int[]{-241455, 2441, -54841, 0, 31145});
+            assertEquals(31145, MinMaxTestObj.MaxCheck());
         }
-        @Test
-        @DisplayName("Test 1244478 is even")
-        public void evenTest4() {
-            assertEquals("EVEN", OddEvenTestObj.OddEvenCheck(1244478));
+
+        @AfterEach
+        public void clearArr() {
+            MinMaxTestObj.clearArr();
         }
 
     }
 
     @AfterEach
-    public void garbageCollect(){
-        OddEvenTestObj = null;
+    public void garbageCollect() {
+        MinMaxTestObj = null;
     }
 
 }
